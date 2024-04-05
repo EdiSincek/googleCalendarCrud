@@ -1,10 +1,11 @@
 import express from "express";
+import googleRouter from "./routes/googleRoutes.js";
 const app = express();
-const PORT = 3000; //Will change it to env later
+const PORT = 3000;
 app.listen(PORT, () => {
-  console.log("Server is running at port: ", PORT);
+    console.log("Server is running at port: ", PORT);
 });
+app.use("/api", googleRouter);
 app.get("/", (req, res) => {
-  res.send("Hello world!");
+    res.send("Hello world!");
 });
-//# sourceMappingURL=index.js.map
