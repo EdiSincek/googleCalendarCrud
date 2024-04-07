@@ -1,0 +1,25 @@
+.UpcomingEvents{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(108, 123, 208, 0.7);
+    border-radius: 10%;
+    margin-top: 2vh;
+    padding:2%;
+    height: 70vh;
+}
+
+.UpcomingEvents ul{
+    list-style-type:none;
+    width:80%;
+}
+
+.UpcomingEvents button{
+    background-color: orange;
+    border-radius: 10%;
+}
+
+.UpcomingEvents button:hover{
+    box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.3);
+}

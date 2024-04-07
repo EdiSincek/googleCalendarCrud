@@ -1,0 +1,39 @@
+.Event{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin:1%;
+    border-radius: 10%;
+    color:white;
+}
+
+.Event:hover{
+    box-shadow: 3px 3px 6px 6px rgba(0, 0, 0, 0.3);
+}
+
+.Event h2{
+    width:20%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right:2%;
+    text-transform:uppercase;
+    color:black;
+}
+
+.Event b{
+    color:black;
+}
+
+.eventDetails{
+    margin-right: 3%;
+}
+
+.eventActionBtns{
+    display: flex;
+    align-items: center;
+}
+
+.eventActionBtns *{
+    margin:2%;
+}
