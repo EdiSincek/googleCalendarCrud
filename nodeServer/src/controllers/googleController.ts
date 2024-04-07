@@ -23,7 +23,7 @@ export const googleController = {
       res.redirect(authUrl);
     } catch (error) {
       res
-        .sendStatus(500)
+        .status(500)
         .send({ error: "Error generating auth url", details: error });
     }
   },
@@ -36,7 +36,7 @@ export const googleController = {
       return res.status(200).send({ message: "Access token set successfully" });
     } catch (error) {
       res
-        .sendStatus(500)
+        .status(500)
         .send({ error: "Error fetching access token", details: error });
     }
   },
@@ -46,8 +46,8 @@ export const googleController = {
       res.send(events);
     } catch (error) {
       res
-        .sendStatus(500)
-        .send({ error: "Error fetching events.", details: error });
+        .status(500)
+        .send({ error: "Error fetching events.", details: error.message });
     }
   },
 };
