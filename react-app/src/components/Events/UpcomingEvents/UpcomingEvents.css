@@ -39,3 +39,9 @@
 .UpcomingEvents button:hover{
     box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.3);
 }
+
+.loader {
+    font-size: 2rem;
+    text-align: center;
+    margin: 50px auto;
+}

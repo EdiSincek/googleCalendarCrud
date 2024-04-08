@@ -1,14 +1,23 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import useCalendar from "../../../hooks/useCalendar";
 import Event from "../Event/Event";
 import "./UpcomingEvents.css";
 
 const UpcomingEvents: React.FC = () => {
   const { events, fetchEvents, deleteEvent } = useCalendar();
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    fetchEvents();
+    const loadData = async () => {
+      await fetchEvents();
+      setIsLoading(false);
+    };
+    loadData();
   }, [fetchEvents]);
+
+  if (isLoading) {
+    return <div className="loader">Loading...</div>;
+  }
 
   return (
     <div className="UpcomingEvents">
