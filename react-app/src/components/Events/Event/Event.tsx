@@ -1,7 +1,10 @@
 import { Event as EventInterface } from "../../../types/Event";
 import "./Event.css";
 
-const Event: React.FC<{ event: EventInterface }> = ({ event }) => {
+const Event: React.FC<{ event: EventInterface; onDelete: () => void }> = ({
+  event,
+  onDelete,
+}) => {
   return (
     <div className="Event">
       <h2>{event.summary}</h2>
@@ -24,7 +27,7 @@ const Event: React.FC<{ event: EventInterface }> = ({ event }) => {
       </div>
       <div className="eventActionBtns">
         <button>Edit</button>
-        <button>Delete</button>
+        <button onClick={onDelete}>Delete</button>
       </div>
     </div>
   );

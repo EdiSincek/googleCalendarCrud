@@ -22,5 +22,17 @@ export default function createCalendarController(calendarService) {
         });
       }
     },
+    deleteEvent: async (req, res) => {
+      try {
+        const { eventId } = req.params;
+        await calendarService.deleteEvent(eventId);
+        res.status(200).send({ message: "Event successfully deleted." });
+      } catch (error) {
+        res.status(500).send({
+          error: "Error deleting event.",
+          details: error.message,
+        });
+      }
+    },
   };
 }

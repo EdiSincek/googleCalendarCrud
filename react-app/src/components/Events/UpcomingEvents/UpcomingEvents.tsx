@@ -19,6 +19,31 @@ const UpcomingEvents: React.FC = () => {
       });
   }, []);
 
+  const deleteEvent = async (eventId: string) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this event?"
+    );
+    if (!confirmDelete) {
+      return;
+    }
+    try {
+      const response = await fetch(
+        `http://localhost:3001/google/calendar/event/${eventId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      if (response.ok) {
+        console.log("Event deleted successfully");
+        setEvents(events.filter((event) => event.eventId !== eventId));
+      } else {
+        console.error("Failed to delete event");
+      }
+    } catch (error) {
+      console.error("Error deleting event: ", error);
+    }
+  };
+
   return (
     <div className="UpcomingEvents">
       <h2 className="title">Your upcoming events</h2>
@@ -28,7 +53,10 @@ const UpcomingEvents: React.FC = () => {
         <ul>
           {events.map((event, index) => (
             <li key={index}>
-              <Event event={event} />
+              <Event
+                event={event}
+                onDelete={() => deleteEvent(event.eventId)}
+              />
             </li>
           ))}
         </ul>

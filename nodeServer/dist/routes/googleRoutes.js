@@ -9,5 +9,6 @@ export default function createGoogleRouter(oauth2Client, calendarService) {
   router.get("/oauth2callback", googleOAuthController.getAccessToken);
   router.get("/calendar/getEvents", calendarController.getEvents);
   router.post("/calendar/createEvent", calendarController.createEvent);
+  router.delete("/calendar/event/:eventId", calendarController.deleteEvent);
   return router;
 }

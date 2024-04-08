@@ -22,6 +22,7 @@ class CalendarService {
         orderBy: "startTime",
       });
       return res.data.items.map((event) => ({
+        eventId: event.id,
         summary: event.summary || "No Title",
         location: event.location || "No Location",
         startDate:
@@ -58,6 +59,17 @@ class CalendarService {
       return res.data;
     } catch (error) {
       throw new Error(`Error creating event: ${error}`);
+    }
+  }
+
+  async deleteEvent(eventId: string, calendarId: string = "primary") {
+    try {
+      await this.calendar.events.delete({
+        calendarId: calendarId,
+        eventId: eventId,
+      });
+    } catch (error) {
+      throw new Error(`Error deleting event: ${error}`);
     }
   }
 }

@@ -1,4 +1,5 @@
 export interface Event {
+  eventId: string;
   summary: string;
   location: string;
   startDate: string;
