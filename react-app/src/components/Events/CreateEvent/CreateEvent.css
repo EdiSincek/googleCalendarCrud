@@ -1,0 +1,46 @@
+.CreateEvent {
+    padding: 1%;
+    background-color: rgba(240, 233, 233, 0.3);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 5%;
+    margin: 2% auto;
+    max-width: 80vw;
+}
+
+.CreateEvent form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.CreateEvent input,
+.CreateEvent textarea,
+.CreateEvent button {
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.CreateEvent input:hover,
+.CreateEvent textarea:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.CreateEvent button {
+    background-color: orange;
+    color: white;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.CreateEvent button:hover {
+    box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.3);
+    background-color: darkorange;
+}
+
+.CreateEvent .title {
+    text-align: center;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: white;
+    text-transform: uppercase;
+}
