@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { EventFormData } from "../../../types/Event";
+import { SimplifiedEvent } from "../../../types/Event";
 import useCalendar from "../../../hooks/useCalendar";
 import "./CreateEvent.css";
 
 const CreateEvent: React.FC = () => {
   const { createEvent } = useCalendar();
-  const [formData, setFormData] = useState<EventFormData>({
+  const [formData, setFormData] = useState<SimplifiedEvent>({
     summary: "",
     location: "",
-    startTime: "",
-    endTime: "",
+    startDate: "",
+    endDate: "",
     description: "",
   });
 
@@ -32,8 +32,8 @@ const CreateEvent: React.FC = () => {
         setFormData({
           summary: "",
           location: "",
-          startTime: "",
-          endTime: "",
+          startDate: "",
+          endDate: "",
           description: "",
         });
       } else {
@@ -50,43 +50,55 @@ const CreateEvent: React.FC = () => {
     <div className="CreateEvent">
       <h2 className="title">{successMessage}</h2>
       <form onSubmit={handleSubmit}>
+        <label htmlFor="summary">Summary:</label>
         <input
+          id="summary"
           type="text"
           name="summary"
           value={formData.summary}
           onChange={handleChange}
-          placeholder="Event Summary"
           required
         />
+
+        <label htmlFor="location">Location:</label>
         <input
+          id="location"
           type="text"
           name="location"
           value={formData.location}
           onChange={handleChange}
-          placeholder="Location"
           required
         />
+
+        <label htmlFor="startDate">Start:</label>
         <input
+          id="startDate"
           type="datetime-local"
-          name="startTime"
-          value={formData.startTime}
+          name="startDate"
+          value={formData.startDate}
           onChange={handleChange}
           required
         />
+
+        <label htmlFor="endDate">End:</label>
         <input
+          id="endDate"
           type="datetime-local"
-          name="endTime"
-          value={formData.endTime}
-          min={formData.startTime}
+          name="endDate"
+          value={formData.endDate}
+          min={formData.startDate}
           onChange={handleChange}
           required
         />
+
+        <label htmlFor="description">Description:</label>
         <textarea
+          id="description"
           name="description"
           value={formData.description}
           onChange={handleChange}
-          placeholder="Description (optional)"
         />
+
         <button type="submit">Create Event</button>
       </form>
     </div>

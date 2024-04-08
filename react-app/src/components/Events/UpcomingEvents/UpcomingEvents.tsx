@@ -21,7 +21,7 @@ const UpcomingEvents: React.FC = () => {
             <li key={index}>
               <Event
                 event={event}
-                onDelete={() => deleteEvent(event.eventId)}
+                onDelete={() => deleteEvent(event.eventId!)}
               />
             </li>
           ))}

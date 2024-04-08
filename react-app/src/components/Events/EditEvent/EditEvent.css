@@ -1,4 +1,4 @@
-.CreateEvent {
+.EditEvent {
     padding: 1%;
     background-color: rgba(240, 233, 233, 0.3);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
@@ -7,42 +7,53 @@
     max-width: 80vw;
 }
 
-.CreateEvent form {
+.EditEvent .form-group {
+    margin-bottom: 15px;
+}
+
+.EditEvent form {
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
 
-.CreateEvent label {
+.EditEvent label {
+    display: block;
+    margin-bottom: 5px;
     font-weight: bold;
 }
 
-.CreateEvent input,
-.CreateEvent textarea,
-.CreateEvent button {
+.EditEvent input,
+.EditEvent textarea {
+    width: 100%;
     padding: 10px;
     border-radius: 4px;
     border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
-.CreateEvent input:hover,
-.CreateEvent textarea:hover{
+.EditEvent input:hover,
+.EditEvent textarea:hover {
     transform: translateY(-3px);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-.CreateEvent button {
+.EditEvent button {
     background-color: orange;
     color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
     transition: background-color 0.2s ease, box-shadow 0.2s ease;
+    margin-top: 10px;
 }
 
-.CreateEvent button:hover {
+.EditEvent button:hover {
     box-shadow: 3px 3px 6px 0px rgba(0, 0, 0, 0.3);
     background-color: darkorange;
 }
 
-.CreateEvent .title {
+.EditEvent .title {
     text-align: center;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color: white;

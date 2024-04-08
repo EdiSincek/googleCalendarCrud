@@ -17,6 +17,7 @@ export default function createGoogleRouter(
   router.get("/calendar/getEvents", calendarController.getEvents);
   router.post("/calendar/createEvent", calendarController.createEvent);
   router.delete("/calendar/event/:eventId", calendarController.deleteEvent);
+  router.put("/calendar/event/:eventId", calendarController.updateEvent);
 
   return router;
 }

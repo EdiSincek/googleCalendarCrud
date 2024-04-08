@@ -16,6 +16,7 @@ export default function createCalendarController(calendarService) {
         const response = await calendarService.createEvent(eventDetails);
         res.send(201);
       } catch (error) {
+        console.log(error);
         res.status(500).send({
           error: "Error while creating event.",
           details: error.message,
@@ -30,6 +31,23 @@ export default function createCalendarController(calendarService) {
       } catch (error) {
         res.status(500).send({
           error: "Error deleting event.",
+          details: error.message,
+        });
+      }
+    },
+    updateEvent: async (req, res) => {
+      try {
+        const { eventId } = req.params;
+        const eventDetails = req.body;
+        const updatedEvent = await calendarService.updateEvent(
+          eventId,
+          eventDetails
+        );
+        res.status(200).send({ message: "Event successfully updated." });
+      } catch (error) {
+        console.log(error);
+        res.status(500).send({
+          error: "Error updating event.",
           details: error.message,
         });
       }
