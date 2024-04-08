@@ -8,5 +8,6 @@ export default function createGoogleRouter(oauth2Client, calendarService) {
   router.get("/login", googleOAuthController.login);
   router.get("/oauth2callback", googleOAuthController.getAccessToken);
   router.get("/calendar/getEvents", calendarController.getEvents);
+  router.post("/calendar/createEvent", calendarController.createEvent);
   return router;
 }

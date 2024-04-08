@@ -16,6 +16,7 @@ const oauth2Client = new OAuth2(
   "http://localhost:3001/google/oauth2callback"
 );
 app.use(cors());
+app.use(express.json());
 const calendarService = new CalendarService(oauth2Client);
 
 const googleRouter = createGoogleRouter(oauth2Client, calendarService);
