@@ -1,10 +1,20 @@
 import express from "express";
-import { googleController } from "../controllers/googleController.js";
+import createGoogleOAuthController from "../controllers/googleOauthController.js";
+import createCalendarController from "../controllers/calendarController.js";
+import { OAuth2Client } from "google-auth-library";
+import CalendarService from "../services/calendarService.js";
 
-const googleRouter = express.Router();
+export default function createGoogleRouter(
+  oauth2Client: OAuth2Client,
+  calendarService: CalendarService
+) {
+  const googleOAuthController = createGoogleOAuthController(oauth2Client);
+  const calendarController = createCalendarController(calendarService);
+  const router = express.Router();
 
-googleRouter.get("/login", googleController.login);
-googleRouter.get("/oauth2callback", googleController.getAccessToken);
-googleRouter.get("/getEvents", googleController.getEvents);
+  router.get("/login", googleOAuthController.login);
+  router.get("/oauth2callback", googleOAuthController.getAccessToken);
+  router.get("/calendar/getEvents", calendarController.getEvents);
 
-export default googleRouter;
+  return router;
+}
