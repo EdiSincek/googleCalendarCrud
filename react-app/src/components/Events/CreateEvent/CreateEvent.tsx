@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { EventFormData } from "../../../types/Event";
+import useCalendar from "../../../hooks/useCalendar";
 import "./CreateEvent.css";
 
 const CreateEvent: React.FC = () => {
+  const { createEvent } = useCalendar();
   const [formData, setFormData] = useState<EventFormData>({
     summary: "",
     location: "",
@@ -22,19 +24,8 @@ const CreateEvent: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSuccessMessage("");
-
     try {
-      const response = await fetch(
-        "http://localhost:3001/google/calendar/createEvent",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await createEvent(formData);
 
       if (response.status === 201) {
         setSuccessMessage("Event created successfully!");
@@ -51,6 +42,7 @@ const CreateEvent: React.FC = () => {
       }
     } catch (error) {
       console.error("Failed to create event:", error);
+      setSuccessMessage("Failed to create event, please try again.");
     }
   };
 
