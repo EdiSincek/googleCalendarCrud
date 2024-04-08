@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { Event as EventType, EventFormData } from "../types/Event";
+import { SimplifiedEvent } from "../types/Event";
 
-const useCalendar = (initialEvents: EventType[] = []) => {
-  const [events, setEvents] = useState<EventType[]>(initialEvents);
+const useCalendar = (initialEvents: SimplifiedEvent[] = []) => {
+  const [events, setEvents] = useState<SimplifiedEvent[]>(initialEvents);
 
   const fetchEvents = async () => {
     try {
@@ -13,13 +13,14 @@ const useCalendar = (initialEvents: EventType[] = []) => {
         throw new Error("Failed to fetch events");
       }
       const data = await response.json();
+      localStorage.setItem("events", JSON.stringify(data));
       setEvents(data);
     } catch (error) {
       console.error("Error fetching events:", error);
     }
   };
 
-  const createEvent = async (eventData: EventFormData) => {
+  const createEvent = async (eventData: SimplifiedEvent) => {
     const response = await fetch(
       "http://localhost:3001/google/calendar/createEvent",
       {

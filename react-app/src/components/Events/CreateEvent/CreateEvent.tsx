@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { EventFormData } from "../../../types/Event";
+import { SimplifiedEvent } from "../../../types/Event";
 import useCalendar from "../../../hooks/useCalendar";
 import "./CreateEvent.css";
 
 const CreateEvent: React.FC = () => {
   const { createEvent } = useCalendar();
-  const [formData, setFormData] = useState<EventFormData>({
+  const [formData, setFormData] = useState<SimplifiedEvent>({
     summary: "",
     location: "",
-    startTime: "",
-    endTime: "",
+    startDate: "",
+    endDate: "",
     description: "",
   });
 
@@ -32,8 +32,8 @@ const CreateEvent: React.FC = () => {
         setFormData({
           summary: "",
           location: "",
-          startTime: "",
-          endTime: "",
+          startDate: "",
+          endDate: "",
           description: "",
         });
       } else {
@@ -68,16 +68,16 @@ const CreateEvent: React.FC = () => {
         />
         <input
           type="datetime-local"
-          name="startTime"
-          value={formData.startTime}
+          name="startDate"
+          value={formData.startDate}
           onChange={handleChange}
           required
         />
         <input
           type="datetime-local"
-          name="endTime"
-          value={formData.endTime}
-          min={formData.startTime}
+          name="endDate"
+          value={formData.endDate}
+          min={formData.startDate}
           onChange={handleChange}
           required
         />

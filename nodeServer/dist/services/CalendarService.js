@@ -19,7 +19,9 @@ class CalendarService {
         location: event.location || "No Location",
         startDate:
           event.start?.dateTime || event.start?.date || "No Start Date",
+        endDate: event.end?.dateTime || event.end?.date || "No End Date",
         organizer: event.organizer?.email || "No Organizer",
+        description: event.description || "No Description",
       }));
     } catch (error) {
       throw new Error(`Error fetching events: ${error}`);
@@ -32,11 +34,11 @@ class CalendarService {
         location: eventDetails.location,
         description: eventDetails.description,
         start: {
-          dateTime: new Date(eventDetails.startTime).toISOString(),
+          dateTime: new Date(eventDetails.startDate).toISOString(),
           timeZone: "Europe/Berlin",
         },
         end: {
-          dateTime: new Date(eventDetails.endTime).toISOString(),
+          dateTime: new Date(eventDetails.endDate).toISOString(),
           timeZone: "Europe/Berlin",
         },
       };
@@ -57,6 +59,30 @@ class CalendarService {
       });
     } catch (error) {
       throw new Error(`Error deleting event: ${error}`);
+    }
+  }
+  async updateEvent(eventId, eventDetails, calendarId = "primary") {
+    try {
+      const updatedEvent = {
+        summary: eventDetails.summary,
+        location: eventDetails.location,
+        start: {
+          dateTime: new Date(eventDetails.startDate).toISOString(),
+          timeZone: "Europe/Berlin",
+        },
+        end: {
+          dateTime: new Date(eventDetails.endDate).toISOString(),
+          timeZone: "Europe/Berlin",
+        },
+      };
+      const res = await this.calendar.events.update({
+        calendarId: calendarId,
+        eventId: eventId,
+        requestBody: updatedEvent,
+      });
+      return res.data;
+    } catch (error) {
+      throw new Error(`Error updating event: ${error}`);
     }
   }
 }
