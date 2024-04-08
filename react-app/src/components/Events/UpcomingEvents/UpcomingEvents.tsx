@@ -7,7 +7,7 @@ const UpcomingEvents: React.FC = () => {
   const [events, setEvents] = useState<EventType[]>([]);
 
   useEffect(() => {
-    fetch("http://localhost:3001/google/getEvents")
+    fetch("http://localhost:3001/google/calendar/getEvents")
       .then((response) => response.json())
       .then((data) => {
         if (data.length > 0) {

@@ -1,7 +1,13 @@
-export default function createGoogleController(oauth2Client, calendarService) {
+import { Request, Response } from "express";
+import { OAuth2Client } from "google-auth-library";
+
+export default function createGoogleOAuthController(
+  oauth2Client: OAuth2Client
+) {
   const SCOPES = ["https://www.googleapis.com/auth/calendar"];
+
   return {
-    login: (req, res) => {
+    login: (req: Request, res: Response) => {
       try {
         const authUrl = oauth2Client.generateAuthUrl({
           access_type: "offline",
@@ -14,10 +20,10 @@ export default function createGoogleController(oauth2Client, calendarService) {
           .send({ error: "Error generating auth url", details: error });
       }
     },
-    getAccessToken: async (req, res) => {
+    getAccessToken: async (req: Request, res: Response) => {
       const { code } = req.query;
       try {
-        const response = await oauth2Client.getToken(code);
+        const response = await oauth2Client.getToken(code as string);
         const { tokens } = response;
         oauth2Client.setCredentials(tokens);
         return res
@@ -27,16 +33,6 @@ export default function createGoogleController(oauth2Client, calendarService) {
         res
           .status(500)
           .send({ error: "Error fetching access token", details: error });
-      }
-    },
-    getEvents: async (req, res) => {
-      try {
-        const events = await calendarService.getEvents();
-        res.send(events);
-      } catch (error) {
-        res
-          .status(500)
-          .send({ error: "Error fetching events.", details: error.message });
       }
     },
   };
