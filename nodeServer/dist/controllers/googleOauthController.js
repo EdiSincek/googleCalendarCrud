@@ -1,5 +1,8 @@
 export default function createGoogleOAuthController(oauth2Client) {
-  const SCOPES = ["https://www.googleapis.com/auth/calendar"];
+  const SCOPES = [
+    "https://www.googleapis.com/auth/calendar",
+    "https://www.googleapis.com/auth/userinfo.email",
+  ];
   return {
     login: (req, res) => {
       try {
@@ -20,13 +23,11 @@ export default function createGoogleOAuthController(oauth2Client) {
         const response = await oauth2Client.getToken(code);
         const { tokens } = response;
         oauth2Client.setCredentials(tokens);
-        return res
-          .status(200)
-          .send({ message: "Access token set successfully" });
+        res.redirect(
+          `http://localhost:3000/auth-success?token=${tokens.id_token}`
+        );
       } catch (error) {
-        res
-          .status(500)
-          .send({ error: "Error fetching access token", details: error });
+        res.redirect(`http://localhost:3000/auth-failure`);
       }
     },
   };
