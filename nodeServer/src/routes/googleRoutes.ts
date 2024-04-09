@@ -5,14 +5,19 @@ import { OAuth2Client } from "google-auth-library";
 import CalendarService from "../services/calendarService.js";
 import { authMiddleware } from "../middleware/authMiddleware.js";
 import { AuthorizationService } from "../services/authorizationService.js";
+import DatabaseService from "../services/databaseService.js";
 
 export default function createGoogleRouter(
   oauth2Client: OAuth2Client,
   calendarService: CalendarService,
-  authService: AuthorizationService
+  authService: AuthorizationService,
+  databaseService: DatabaseService
 ) {
   const googleOAuthController = createGoogleOAuthController(oauth2Client);
-  const calendarController = createCalendarController(calendarService);
+  const calendarController = createCalendarController(
+    calendarService,
+    databaseService
+  );
   const verifyAuth = authMiddleware(authService);
   const router = express.Router();
 

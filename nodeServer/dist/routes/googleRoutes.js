@@ -5,10 +5,14 @@ import { authMiddleware } from "../middleware/authMiddleware.js";
 export default function createGoogleRouter(
   oauth2Client,
   calendarService,
-  authService
+  authService,
+  databaseService
 ) {
   const googleOAuthController = createGoogleOAuthController(oauth2Client);
-  const calendarController = createCalendarController(calendarService);
+  const calendarController = createCalendarController(
+    calendarService,
+    databaseService
+  );
   const verifyAuth = authMiddleware(authService);
   const router = express.Router();
   router.get("/login", googleOAuthController.login);
