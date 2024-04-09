@@ -1,7 +1,15 @@
+import React from "react";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 import "./NavBar.css";
 
 const NavBar: React.FC = () => {
+  const { isLoggedIn } = useAuth();
+
+  if (!isLoggedIn) {
+    return null;
+  }
+
   return (
     <div className="NavBar">
       <ul>
