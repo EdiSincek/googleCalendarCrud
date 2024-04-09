@@ -1,4 +1,7 @@
-export default function createCalendarController(calendarService) {
+export default function createCalendarController(
+  calendarService,
+  databaseService
+) {
   return {
     getEvents: async (req, res) => {
       try {
@@ -14,6 +17,11 @@ export default function createCalendarController(calendarService) {
       try {
         const eventDetails = req.body;
         const response = await calendarService.createEvent(eventDetails);
+        const log = {
+          action_type: "CREATED",
+          event_id: response.id,
+        };
+        await databaseService.addLog(log);
         res.send(201);
       } catch (error) {
         console.log(error);
@@ -27,6 +35,11 @@ export default function createCalendarController(calendarService) {
       try {
         const { eventId } = req.params;
         await calendarService.deleteEvent(eventId);
+        const log = {
+          action_type: "DELETED",
+          event_id: eventId,
+        };
+        await databaseService.addLog(log);
         res.status(200).send({ message: "Event successfully deleted." });
       } catch (error) {
         res.status(500).send({
@@ -43,6 +56,11 @@ export default function createCalendarController(calendarService) {
           eventId,
           eventDetails
         );
+        const log = {
+          action_type: "EDITED",
+          event_id: eventId,
+        };
+        await databaseService.addLog(log);
         res.status(200).send({ message: "Event successfully updated." });
       } catch (error) {
         console.log(error);
