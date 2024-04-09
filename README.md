@@ -1,5 +1,5 @@
 # googleCalendarCrud
-Simple fullstack app for crud actions over google calendar
+Simple fullstack app for crud actions over google calendar<br/>
 Node, React, Typescript, PostgreSql
 
 <b>BACKEND</b>
@@ -63,7 +63,7 @@ Node, React, Typescript, PostgreSql
 </ul>
 ![db](https://github.com/EdiSincek/googleCalendarCrud/assets/87430076/6af3260a-b954-4637-9e15-612371d7ca02)
 
-<b>POTENTIAL IMPROVEMENTS</b>
+<br/><b>POTENTIAL IMPROVEMENTS</b>
 <ul>
   <li>Handling multiple concurrent users
     <ul>
