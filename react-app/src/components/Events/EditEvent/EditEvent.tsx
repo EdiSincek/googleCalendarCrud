@@ -30,7 +30,9 @@ const EditEvent: React.FC = () => {
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toISOString().slice(0, 16);
+    const timeZoneOffsetInMs = date.getTimezoneOffset() * 60000; // Offset in milliseconds
+    const localDate = new Date(date.getTime() - timeZoneOffsetInMs);
+    return localDate.toISOString().slice(0, 16);
   };
 
   const handleChange = (
