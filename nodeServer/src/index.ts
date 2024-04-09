@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import createGoogleRouter from "./routes/googleRoutes.js";
 import CalendarService from "./services/calendarService.js";
 import cors from "cors";
+import { AuthorizationService } from "./services/authorizationService.js";
 
 dotenv.config();
 
@@ -18,8 +19,13 @@ const oauth2Client = new OAuth2(
 app.use(cors());
 app.use(express.json());
 const calendarService = new CalendarService(oauth2Client);
+const authService = new AuthorizationService(oauth2Client);
 
-const googleRouter = createGoogleRouter(oauth2Client, calendarService);
+const googleRouter = createGoogleRouter(
+  oauth2Client,
+  calendarService,
+  authService
+);
 app.use("/google", googleRouter);
 
 app.listen(PORT, () => {
