@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { SimplifiedEvent } from "../../../types/Event";
+import { useAuth } from "../../../contexts/AuthContext";
 import "./EditEvent.css";
 
 const EditEvent: React.FC = () => {
   const navigate = useNavigate();
+  const { token } = useAuth();
   const { eventId } = useParams<{ eventId: string }>();
   const [formData, setFormData] = useState<SimplifiedEvent>({
     eventId: "",
@@ -51,6 +53,7 @@ const EditEvent: React.FC = () => {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
           },
           body: JSON.stringify(formData),
         }

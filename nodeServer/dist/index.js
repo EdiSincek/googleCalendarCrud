@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import createGoogleRouter from "./routes/googleRoutes.js";
 import CalendarService from "./services/calendarService.js";
 import cors from "cors";
+import { AuthorizationService } from "./services/authorizationService.js";
 dotenv.config();
 const app = express();
 const PORT = 3001;
@@ -12,7 +13,8 @@ const oauth2Client = new OAuth2(process.env.GOOGLE_CLIENT_ID, process.env.GOOGLE
 app.use(cors());
 app.use(express.json());
 const calendarService = new CalendarService(oauth2Client);
-const googleRouter = createGoogleRouter(oauth2Client, calendarService);
+const authService = new AuthorizationService(oauth2Client);
+const googleRouter = createGoogleRouter(oauth2Client, calendarService, authService);
 app.use("/google", googleRouter);
 app.listen(PORT, () => {
     console.log("Server is running at port: ", PORT);

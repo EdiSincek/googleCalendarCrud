@@ -1,13 +1,20 @@
 import { useState } from "react";
 import { SimplifiedEvent } from "../types/Event";
+import { useAuth } from "../contexts/AuthContext";
 
 const useCalendar = (initialEvents: SimplifiedEvent[] = []) => {
   const [events, setEvents] = useState<SimplifiedEvent[]>(initialEvents);
+  const { token } = useAuth();
 
   const fetchEvents = async () => {
     try {
       const response = await fetch(
-        "http://localhost:3001/google/calendar/getEvents"
+        "http://localhost:3001/google/calendar/getEvents",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       if (!response.ok) {
         throw new Error("Failed to fetch events");
@@ -25,7 +32,10 @@ const useCalendar = (initialEvents: SimplifiedEvent[] = []) => {
       "http://localhost:3001/google/calendar/createEvent",
       {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
         body: JSON.stringify(eventData),
       }
     );
@@ -45,6 +55,9 @@ const useCalendar = (initialEvents: SimplifiedEvent[] = []) => {
         `http://localhost:3001/google/calendar/event/${eventId}`,
         {
           method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
